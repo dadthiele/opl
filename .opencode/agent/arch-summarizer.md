@@ -4,8 +4,8 @@ mode: primary
 temperature: 0.15
 tools:
   write: true
-  edit: false
-  bash: false
+  edit: true
+  bash: true
   read: true
   glob: true
   grep: true
@@ -58,3 +58,5 @@ B Payment : X stripe : > UserData : ! S subscriptions : ⚠ payment-failure
 GRAPH E:signup > Auth > Database ; E:subscribe > Payment > X stripe ; ! S:users S:subscriptions ; ⚠ high-security financial
 
 If no architecture-level content is visible, output minimal GRAPH with ⚠ insufficient-context
+
+Output the opl to a new file called application.opl
