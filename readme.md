@@ -2,6 +2,8 @@
 
 Two primary agents to maintain a tiny, diffable architecture map (`application.opl`) and enforce architectural safety during code changes.
 
+Experiment to Guard against architectural drift as agents build against existing code bases.
+
 ### Agents Included
 
 1. **arch-summarizer**   
