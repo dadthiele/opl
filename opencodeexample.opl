@@ -1,0 +1,14 @@
+SYS OpenCodeAI
+B OpencodeCLI : E run > ApiGateway : E generate > ApiGateway : E auth > AuthService : E agent > ApiGateway : E serve > ApiGateway : ! S storage : ⚠ local-filesystem-access
+B ApiGateway : X cloudflare-workers : E share-create > Storage : E share-delete > Storage : > SyncServer : ! S kv : ! S storage : ? invalid-key → REJECT
+B SyncServer : > Storage : > AuthService : ! S kv : ⚠ websocket-state-loss
+B AuthService : X cloudflare-workers : X github : X google : > Database : ! S kv : ! S users : ⚠ credential-exposure
+B ConsoleBackend : X cloudflare : X stripe : > Database : > AuthService : ! S users : ! S workspaces : ! S billing
+B Database : X planetscale : ! S users : ! S workspaces : ! S billing : ! S models : ! S keys : ⚠ data-loss
+B Storage : X r2-bucket : ! S sessions : ! S shares : ⚠ data-loss
+B WebDocs : X cloudflare : E docs-access > ApiGateway
+B WebApp : X cloudflare : > ConsoleBackend : > AuthService : ! S users
+B DesktopApp : X tauri : > ApiGateway : > Database : ! S local-db
+B PaymentService : X stripe : > Database : ! S billing : ! S subscriptions : ⚠ payment-failure
+B Enterprise : X cloudflare : > Database : ! S enterprise-billing
+GRAPH E:run E:generate E:auth E:agent > OpencodeCLI > ApiGateway ; E:share-create E:share-delete > ApiGateway > Storage ; SyncServer > Storage > AuthService ; AuthService > Database ; ConsoleBackend > AuthService > Database ; X:stripe > PaymentService > Database ; ! S:storage ! S:database ! S:users ! S:workspaces ! S:billing ! S:subscriptions ; ⚠ credential-exposure payment-failure data-loss websocket-state-loss
