@@ -78,13 +78,15 @@ The **builder** agent gates every code change against this file → prevents sil
 
 ```bash
 # Clone or create repo
-git clone https://github.com/your-username/opl-ultra-agents.git
+git clone https://github.com/dadthiele/opl.git
 
 # Copy agent files into OpenCode (adjust paths as needed)
 cp arch-summarizer.md ~/.config/opencode/agents/
 cp builder.md ~/.config/opencode/agents/
 
-# Or place in project: .opencode/agents/
+Run opencode in your folder and tab to the summarizer agent
+Run "create an opl for this project"
+Tab to builder and start building based on the opl
 
 ## License
 
