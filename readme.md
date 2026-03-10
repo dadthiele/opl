@@ -1,4 +1,4 @@
-# OPL-Ultra Agents for OpenCode
+# OPL-Ultra Agents for OpenCode (OPL - Opencode Pseudo Language)
 
 Two primary agents to maintain a tiny, diffable architecture map (`application.opl`) and enforce architectural safety during code changes.
 
