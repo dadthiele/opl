@@ -84,5 +84,7 @@ cp builder.md ~/.config/opencode/agents/
 
 # Or place in project: .opencode/agents/
 
+## License
 
+MIT – see [LICENSE.md] for full text.
 
