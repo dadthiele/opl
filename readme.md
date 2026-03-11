@@ -1,6 +1,6 @@
-# OPL - Opencode Pseudo Language
+# Architecture Memory for agents
 
-Two primary agents to maintain a tiny, diffable architecture map (`application.opl`) and enforce architectural safety during code changes.
+Two primary agents to maintain a tiny, diffable architecture map (`ArchitectureMemory.md`) and enforce architectural safety during code changes.
 
 Experiment to Guard against architectural drift as agents build against existing code bases.
 
@@ -9,28 +9,28 @@ Experiment to Guard against architectural drift as agents build against existing
 1. **arch-summarizer**   
    Extreme Architecture Summarizer Agent  
    - Input: codebase, files, folders, or context  
-   - Output: pure OPL-Ultra notation (colon single-line style)  
-   - Purpose: generate or update `application.opl` from real code  
+   - Output: pure notation (colon single-line style)  
+   - Purpose: generate or update `ArchitectureMemory.md` from real code  
    - Strict rules: only major boundaries (B), entries (E), flows (> <), mutations (!), externals (X), risks (⚠), final GRAPH line  
    - Aggressively discards local logic, helpers, most conditionals  
    - Mode: primary (configurable to subagent if preferred)
 
 2. **builder** 
    Architecture-Aware Builder Agent  
-   - Always reads `application.opl` first (mandatory)  
+   - Always reads `ArchitectureMemory.md` first (mandatory)  
    - Assesses change impact using built-in cheat sheet (LOW / MEDIUM / HIGH / CRITICAL)  
    - Refuses or warns on HIGH/CRITICAL changes without mitigation  
    - Applies code edits only after assessment (uses write/edit tools)  
-   - Re-generates updated OPL after changes  
+   - Re-generates updated version after changes  
    - Output format:  
      - Impact Assessment  
-     - Updated OPL-Ultra (if changed)  
+     - Updated version (if changed)  
      - Code Changes Summary  
    - Mode: primary
 
 ### Core Idea
 
-Keep a single ultra-compact file `application.opl` as the living architecture snapshot:
+Keep a single ultra-compact file `ArchitectureMemory.md` as the living architecture snapshot:
 
 - 5–25 boundaries max
 - Single-line colon statements
@@ -48,7 +48,7 @@ The **builder** agent gates every code change against this file → prevents sil
 ### Usage
 
 1. Add the two agent files to your OpenCode config or `.opencode/agents/` folder
-2. (Optional) Create an empty `application.opl` in project root
+2. (Optional) Create an empty `ArchitectureMemory.md` in project root
 3. In OpenCode chat:
 
    - Generate baseline architecture:
@@ -62,16 +62,16 @@ The **builder** agent gates every code change against this file → prevents sil
      ```
 
    The builder will:
-   - Read `application.opl`
+   - Read `ArchitectureMemory.md`
    - Assess impact
    - Proceed (or refuse)
-   - Update the OPL if needed
+   - Update the result if needed
 
 ### Project Goals
 
-- Extreme compression: even 3M+ LOC codebase → < 5,000 lines OPL (ideally < 1,000)
+- Extreme compression: even 3M+ LOC codebase → < 5,000 lines (ideally < 1,000)
 - Enforce "consult architecture first" discipline
-- Make PRs and refactors architecture-visible via OPL diffs
+- Make PRs and refactors architecture-visible via diffs
 - Enable future oracle/monitoring agents to detect systemic risk automatically
 
 ### Getting Started
@@ -85,7 +85,7 @@ cp arch-summarizer.md ~/.config/opencode/agents/
 cp builder.md ~/.config/opencode/agents/
 
 Run opencode in your folder and tab to the summarizer agent
-Run "create an opl for this project"
+Run "create an Architecture Memory for this project"
 Tab to builder and start building based on the opl
 
 ## License
